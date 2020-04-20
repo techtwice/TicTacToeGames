@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 open class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -66,6 +68,7 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
             btSelected.setBackgroundResource(R.color.blue)
             player1.add(collId)
             activePlayer = 2
+            autoPlay()
         } else {
             btSelected.text = "O"
             btSelected.setBackgroundResource(R.color.darkGreen)
@@ -75,6 +78,44 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         btSelected.isEnabled = false
         checkWinner()
+    }
+
+    private fun autoPlay() {
+
+        val emptyCells = ArrayList<Int>()
+
+        for (collId in 1..9) {
+
+            if (!(player1.contains(collId) || player2.contains(collId))) {
+                emptyCells.add(collId)
+            }
+        }
+
+        if (emptyCells.size == 0) {
+            restartGame()
+        }
+
+        val r = Random()
+        val randIndex = r.nextInt(emptyCells.size)
+        val cellId = emptyCells[randIndex]
+
+        val btSelected: Button?
+        btSelected = when (cellId) {
+            1 -> bt1
+            2 -> bt2
+            3 -> bt3
+            4 -> bt4
+            5 -> bt5
+            6 -> bt6
+            7 -> bt7
+            8 -> bt8
+            9 -> bt9
+            else -> {
+                bt1
+            }
+        }
+
+        playGames(cellId, btSelected)
     }
 
     private fun checkWinner() {
