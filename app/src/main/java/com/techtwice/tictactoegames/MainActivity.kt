@@ -1,5 +1,6 @@
 package com.techtwice.tictactoegames
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -73,6 +74,7 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun changeAutoPlay() {
         if (autoPlay) {
             autoPlay = false
