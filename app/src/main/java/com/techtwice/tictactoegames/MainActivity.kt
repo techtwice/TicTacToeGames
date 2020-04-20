@@ -73,6 +73,29 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    /*
+        1. Have To Know How To Use R.id.btAutoPlay -> collId = 100 mean when I like to directly call the function
+           in this case
+        2. & How To Solve This Bug
+        2020-04-21 05:34:02.291 30220-30220/com.techtwice.tictactoegames E/AndroidRuntime: FATAL EXCEPTION: main
+    Process: com.techtwice.tictactoegames, PID: 30220
+    java.lang.IllegalArgumentException: bound must be positive
+        at java.util.Random.nextInt(Random.java:388)
+        at com.techtwice.tictactoegames.MainActivity.autoPlay(MainActivity.kt:128)
+        at com.techtwice.tictactoegames.MainActivity.playGames(MainActivity.kt:98)
+        at com.techtwice.tictactoegames.MainActivity.onClick(MainActivity.kt:72)
+        at android.view.View.performClick(View.java:7125)
+        at android.view.View.performClickInternal(View.java:7102)
+        at android.view.View.access$3500(View.java:801)
+        at android.view.View$PerformClick.run(View.java:27336)
+        at android.os.Handler.handleCallback(Handler.java:883)
+        at android.os.Handler.dispatchMessage(Handler.java:100)
+        at android.os.Looper.loop(Looper.java:214)
+        at android.app.ActivityThread.main(ActivityThread.java:7356)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+     */
 
     @SuppressLint("SetTextI18n")
     private fun changeAutoPlay() {
