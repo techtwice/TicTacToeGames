@@ -7,12 +7,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+open class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     var activePlayer = 1
 
     var player1 = ArrayList<Int>()
     var player2 = ArrayList<Int>()
+
+    var player1WinsCounts = 0
+    var player2WinsCounts = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +74,100 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         btSelected.isEnabled = false
+        checkWinner()
     }
 
+    private fun checkWinner() {
+
+        var winer = -1
+
+        // row 1
+        if (player1.contains(1) && player1.contains(2) && player1.contains(3)) {
+            winer = 1
+        }
+        if (player2.contains(1) && player2.contains(2) && player2.contains(3)) {
+            winer = 2
+        }
+
+        // row 2
+        if (player1.contains(4) && player1.contains(5) && player1.contains(6)) {
+            winer = 1
+        }
+        if (player2.contains(4) && player2.contains(5) && player2.contains(6)) {
+            winer = 2
+        }
+
+        // row 3
+        if (player1.contains(7) && player1.contains(8) && player1.contains(9)) {
+            winer = 1
+        }
+        if (player2.contains(7) && player2.contains(8) && player2.contains(9)) {
+            winer = 2
+        }
+
+        // col 1
+        if (player1.contains(1) && player1.contains(4) && player1.contains(7)) {
+            winer = 1
+        }
+        if (player2.contains(1) && player2.contains(4) && player2.contains(7)) {
+            winer = 2
+        }
+
+        // col 2
+        if (player1.contains(2) && player1.contains(5) && player1.contains(8)) {
+            winer = 1
+        }
+        if (player2.contains(2) && player2.contains(5) && player2.contains(8)) {
+            winer = 2
+        }
+
+        // col 3
+        if (player1.contains(3) && player1.contains(6) && player1.contains(9)) {
+            winer = 1
+        }
+        if (player2.contains(3) && player2.contains(6) && player2.contains(9)) {
+            winer = 2
+        }
+
+        if (winer == 1) {
+            player1WinsCounts += 1
+            Toast.makeText(this, "Player 1 win the game", Toast.LENGTH_LONG).show()
+            restartGame()
+        } else if (winer == 2) {
+            player2WinsCounts += 1
+            Toast.makeText(this, "Player 2 win the game", Toast.LENGTH_LONG).show()
+            restartGame()
+        }
+    }
+
+    fun restartGame() {
+        activePlayer = 1
+        player1.clear()
+        player2.clear()
+
+        for (collId in 1..9) {
+
+            var btSelected: Button? = when (collId) {
+                1 -> bt1
+                2 -> bt2
+                3 -> bt3
+                4 -> bt4
+                5 -> bt5
+                6 -> bt6
+                7 -> bt7
+                8 -> bt8
+                9 -> bt9
+                else -> {
+                    bt1
+                }
+            }
+            btSelected!!.text = ""
+            btSelected!!.setBackgroundResource(R.color.whileBu)
+            btSelected!!.isEnabled = true
+        }
+
+        Toast.makeText(this, "Player1: $player1WinsCounts, Player2: $player2WinsCounts", Toast.LENGTH_LONG).show()
+
+    }
 
 }
